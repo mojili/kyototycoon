@@ -1,0 +1,6 @@
+#!/bin/sh
+
+srcfile="$1"
+destfile="$1.$2"
+cp -f "$srcfile" ./db_backup/"$destfile"
+
