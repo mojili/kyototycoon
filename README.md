@@ -1,4 +1,4 @@
-# This is kyototycoon installation guidance. 
+# This is kyototycoon installation guidance through saltstack. 
 
 for running this state, you have to use Jenkins interface.
 
