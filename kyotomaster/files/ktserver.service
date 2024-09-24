@@ -1,0 +1,27 @@
+[Unit]
+Description=Kyoto Tycoon key-value server (and Kyoto Cabinet library)
+Documentation=man:ktserver
+After=syslog.target network.target
+ConditionFileNotEmpty=/etc/kyototycoon/ktserver.conf
+
+[Service]
+Type=simple
+PIDFile=/run/ktserver.pid
+PrivateDevices=yes
+SyslogLevel=err
+Restart=always
+User=root
+Group=root
+RestartSec=15s
+WorkingDirectory=/opt/kyototycoon
+EnvironmentFile=/etc/kyototycoon/ktserver.conf
+ExecStartPre=/bin/rm -f '/run/ktserver.pid'; chown root.root /var/log/kyototycoon/ktserver.log
+ExecStartPost=/usr/bin/touch /run/ktserver.pid
+#ExecStart=/usr/local/bin/ktserver -port $PORT -ulog $ULOG -sid $SID -cmd $CMD -log $LOG -ls -pid $PID -th $TH -mhost $MHOST -mport $MPORT -rts $RTS $DB
+ExecStart=/usr/local/bin/ktserver -port $PORT -ulog $ULOG -sid $SID -cmd $CMD -log $LOG -ls -pid $PID -th $TH -rts $RTS $DB
+ExecReload=/usr/bin/kill -HUP /run/ktserver.pid
+KillSignal=SIGQUIT
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target

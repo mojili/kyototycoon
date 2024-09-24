@@ -1,0 +1,4 @@
+#* * * * *  /bin/sh /opt/kyototycoon/ktbin/recovery.sh
+01 00 * * * /usr/local/bin/ktremotemgr sync -host master01 -cmd dbbackup
+03 00 * * * /usr/local/bin/ktremotemgr slave -host master01 -ur -ts `ls -rt /opt/kyototycoon/db_backup/* | tail -1 | cut -d"." -f 3`
+05 00 * * * /usr/sbin/tmpreaper -m 30d /opt/kyototycoon/db_backup

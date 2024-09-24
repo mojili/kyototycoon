@@ -1,0 +1,9 @@
+[Unit]
+Description=kt_exporter systemd service.
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/kyototycoon_exporter
+
+[Install]
+WantedBy=multi-user.target
